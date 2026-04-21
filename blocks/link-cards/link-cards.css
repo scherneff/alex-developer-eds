@@ -2,6 +2,13 @@
 .link-cards.block {
   background-color: rgb(73, 81, 89);
   width: 100%;
+  /* Make the block itself a flex row of 4 cards */
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  padding: 0 48px;
+  min-height: 214px;
+  box-sizing: border-box;
 }
 
 /* Remove section padding so this spans full width */
@@ -11,21 +18,9 @@ main .section:has(.link-cards.block) {
   margin: 0;
 }
 
-/* 4 columns in a row */
-.link-cards.block > div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 48px;
-  min-height: 214px;
-  max-width: 1200px;
-  margin: 0 auto;
-  gap: 16px;
-}
-
 /* Each card = flex column: icon on top, button below */
-.link-cards.block > div > div {
-  display: flex;
+.link-cards.block > div {
+  display: flex !important;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -35,12 +30,25 @@ main .section:has(.link-cards.block) {
   text-align: center;
 }
 
+/* Icon wrapper */
+.link-cards.block .link-cards-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* Icon */
 .link-cards.block img {
   height: 74px;
   width: auto;
   display: block;
-  margin: 0 auto;
+}
+
+/* Link wrapper */
+.link-cards.block > div > div:not(.link-cards-icon) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Cyan button */
@@ -69,12 +77,12 @@ main .section:has(.link-cards.block) {
 }
 
 @media (max-width: 900px) {
-  .link-cards.block > div {
+  .link-cards.block {
     flex-wrap: wrap;
     padding: 16px;
     gap: 8px;
   }
-  .link-cards.block > div > div {
+  .link-cards.block > div {
     flex: 0 0 calc(50% - 8px);
   }
 }
