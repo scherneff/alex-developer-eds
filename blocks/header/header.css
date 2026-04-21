@@ -41,7 +41,7 @@
 .header-brand .header-search {
   display: flex;
   align-items: center;
-  flex: 1;
+  flex: 0 1 600px;
   height: 28px;
   background: #fff;
   border-radius: 2px;
@@ -67,7 +67,7 @@
   color: #111;
   font-size: 13px;
   padding: 0 0.5rem;
-  flex: 1;
+  flex: 0 1 600px;
   outline: none;
   height: 100%;
 }
