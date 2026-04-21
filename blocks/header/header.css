@@ -1,4 +1,4 @@
-/* Header block — dark nav bar */
+/* Header block — two-tier dark nav */
 .header.block {
   background-color: var(--color-dark-navy, rgb(22, 42, 56));
   position: sticky;
@@ -7,150 +7,91 @@
   width: 100%;
 }
 
+/* Outer nav stacks the two tiers vertically */
 .header.block nav {
   display: flex;
-  align-items: center;
-  max-width: var(--content-max-width, 1140px);
-  margin: 0 auto;
-  padding: 0 1.5rem;
-  height: var(--nav-height, 40px);
-  gap: 1rem;
+  flex-direction: column;
 }
 
-/* Brand / logo area */
-.header.block .header-brand {
+/* ── Tier 1: Logo + Search + Account ── */
+.header-brand {
   display: flex;
   align-items: center;
-  width: 100%;
   gap: 0.75rem;
+  padding: 0 1.5rem;
+  height: 50px;
+  max-width: var(--content-max-width, 1140px);
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.header.block .header-brand > p:first-child img {
-  height: 24px;
+/* Logo */
+.header-brand .header-logo img,
+.header-brand .header-logo picture img {
+  height: 28px;
   width: auto;
   display: block;
 }
 
-/* Main nav list */
-.header.block nav > div > ul {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  gap: 0;
-  flex: 1;
-}
-
-.header.block nav > div > ul > li {
-  position: relative;
-}
-
-.header.block nav > div > ul > li > p > a,
-.header.block nav > div > ul > li > a {
-  display: block;
-  padding: 0 0.75rem;
-  height: var(--nav-height, 40px);
-  line-height: var(--nav-height, 40px);
-  color: #ccc;
-  font-size: 13px;
-  font-weight: 400;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.header.block nav > div > ul > li:hover > p > a,
-.header.block nav > div > ul > li:hover > a {
-  color: #fff;
-}
-
-/* Dropdown */
-.header.block nav > div > ul > li > ul {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: rgb(22, 42, 56);
-  list-style: none;
-  margin: 0;
-  padding: 0.5rem 0;
-  min-width: 200px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  z-index: 200;
-}
-
-.header.block nav > div > ul > li:hover > ul {
-  display: block;
-}
-
-.header.block nav > div > ul > li > ul > li > a {
-  display: block;
-  padding: 0.4rem 1rem;
-  color: #ccc;
-  font-size: 13px;
-  text-decoration: none;
-}
-
-.header.block nav > div > ul > li > ul > li > a:hover {
-  color: #fff;
-  background: rgba(255,255,255,0.05);
-}
-
 /* Search bar */
-.header.block .header-search {
+.header-brand .header-search {
   display: flex;
   align-items: center;
   background: rgba(255,255,255,0.1);
   border-radius: 3px;
   padding: 0 0.5rem;
+  height: 32px;
+  flex: 1;
+  max-width: 400px;
   margin: 0 0.5rem;
-  height: 28px;
 }
 
-.header.block .header-search span {
+.header-brand .header-search span {
   color: #ccc;
   font-size: 12px;
   cursor: pointer;
   white-space: nowrap;
+  margin-right: 4px;
 }
 
-.header.block .header-search input {
+.header-brand .header-search input {
   background: transparent;
   border: none;
   color: #fff;
   font-size: 13px;
   padding: 0 0.25rem;
-  width: 200px;
+  flex: 1;
   outline: none;
 }
 
-.header.block .header-search input::placeholder {
+.header-brand .header-search input::placeholder {
   color: rgba(255,255,255,0.5);
 }
 
-.header.block .header-search .search-btn {
+.header-brand .header-search .search-btn {
   background: rgb(255, 153, 0);
   border: none;
   border-radius: 2px;
   cursor: pointer;
   font-size: 12px;
-  padding: 2px 6px;
-  margin-left: 4px;
+  padding: 2px 8px;
 }
 
-/* Utility links (Account) */
-.header.block .header-utility {
+/* Account / utility links */
+.header-brand .header-utility {
   margin-left: auto;
 }
 
-.header.block .header-utility a {
+.header-brand .header-utility a {
   color: #ccc;
   font-size: 13px;
   text-decoration: none;
   white-space: nowrap;
 }
 
-/* Hamburger — mobile only */
-.header.block .header-hamburger {
+/* Hamburger — hidden on desktop */
+.header-brand .header-hamburger {
   display: none;
   flex-direction: column;
   gap: 4px;
@@ -161,15 +102,90 @@
   margin-left: auto;
 }
 
-.header.block .header-hamburger span {
+.header-brand .header-hamburger span {
   display: block;
   width: 20px;
   height: 2px;
   background: #fff;
 }
 
+/* ── Tier 2: Nav links ── */
+.header-sections {
+  background-color: rgb(21, 41, 57);
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.header-sections .header-nav {
+  display: flex;
+  list-style: none;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  max-width: var(--content-max-width, 1140px);
+  height: 40px;
+  align-items: center;
+  gap: 0;
+}
+
+.header-sections .header-nav > li {
+  position: relative;
+}
+
+.header-sections .header-nav > li > p > a,
+.header-sections .header-nav > li > a {
+  display: block;
+  padding: 0 0.75rem;
+  height: 40px;
+  line-height: 40px;
+  color: #ccc;
+  font-size: 13px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.header-sections .header-nav > li:hover > p > a,
+.header-sections .header-nav > li:hover > a {
+  color: #fff;
+  background: rgba(255,255,255,0.05);
+}
+
+/* Dropdowns */
+.header-sections .header-nav > li > ul {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: rgb(22, 42, 56);
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0;
+  min-width: 200px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  z-index: 200;
+}
+
+.header-sections .header-nav > li:hover > ul {
+  display: block;
+}
+
+.header-sections .header-nav > li > ul > li > a {
+  display: block;
+  padding: 0.4rem 1rem;
+  color: #ccc;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.header-sections .header-nav > li > ul > li > a:hover {
+  color: #fff;
+  background: rgba(255,255,255,0.05);
+}
+
+/* ── Mobile ── */
 @media (max-width: 900px) {
-  .header.block nav > div > ul { display: none; }
-  .header.block .header-hamburger { display: flex; }
-  .header.block nav[aria-expanded="true"] > div > ul { display: flex; flex-direction: column; position: absolute; top: var(--nav-height, 40px); left: 0; right: 0; background: rgb(22,42,56); padding: 1rem; }
+  .header-brand .header-hamburger { display: flex; }
+  .header-sections { display: none; }
+  .header.block nav[aria-expanded="true"] .header-sections { display: block; }
+  .header-sections .header-nav { flex-direction: column; height: auto; padding: 0.5rem 0; }
+  .header-sections .header-nav > li > p > a,
+  .header-sections .header-nav > li > a { height: auto; line-height: 1.5; padding: 0.5rem 1rem; }
 }
