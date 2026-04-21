@@ -1,0 +1,55 @@
+@import url('brand.css');
+
+/* AEM EDS Styles - Base */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--body-font-family, sans-serif);
+  color: var(--text-color, #1a1a1a);
+  background-color: var(--background-color, #fff);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--heading-font-family, sans-serif);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0 0 1em;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+
+p { margin: 0 0 1em; }
+
+a { color: var(--link-color, #0066cc); text-decoration: none; }
+a:hover { color: var(--link-hover-color, #004499); }
+
+img { max-width: 100%; height: auto; display: block; }
+
+main { min-height: 60vh; }
+
+main .section { padding: 3rem 1.5rem; max-width: 1200px; margin: 0 auto; }
+
+main .button-container { display: inline; }
+main a.button:any-link {
+  background: none; border: none; border-radius: 0;
+  color: var(--link-color); font-size: inherit; font-weight: inherit;
+  padding: 0; margin: 0; text-decoration: underline; white-space: normal;
+}
+
+@media (min-width: 900px) {
+  main .section { padding: 4rem 2rem; }
+}
+
+main .button-container { display: inline; }
+main a.button:any-link {
+  background: none; border: none; border-radius: 0;
+  color: var(--link-color); font-size: inherit; font-weight: inherit;
+  padding: 0; margin: 0; text-decoration: underline; white-space: normal;
+}
