@@ -1,0 +1,4 @@
+headers:
+/drafts/**:
+x-robots-tag: noindex
+
