@@ -1,3 +1,4 @@
 mountpoints:
-/: "https://content.da.live/scherneff/alex-developer-eds"
-
+/:
+url: https://content.da.live/scherneff/alex-developer-eds/
+type: markup
