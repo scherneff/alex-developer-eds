@@ -1,0 +1,20 @@
+/* Brand: Amazon Alexa Developer Portal */
+:root {
+  --heading-font-family: "AmazonEmber", "Amazon Ember", Arial, sans-serif;
+  --body-font-family: "AmazonEmber", "Amazon Ember", Arial, sans-serif;
+  --background-color: #ffffff;
+  --text-color: rgb(33, 37, 41);
+  --link-color: rgb(47, 47, 47);
+  --link-hover-color: #0066c0;
+  --section-padding: 3rem 1.5rem;
+  --nav-height: 40px;
+  --color-dark-navy: rgb(22, 42, 56);
+  --color-nav-dark: rgb(21, 41, 57);
+  --color-medium-gray: rgb(73, 81, 89);
+  --color-light-gray: rgb(246, 246, 246);
+  --color-footer-dark: rgb(26, 54, 76);
+  --color-footer-bottom: rgb(64, 73, 81);
+  --content-max-width: 1140px;
+}
+
+html, body { overflow: auto !important; }
