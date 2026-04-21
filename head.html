@@ -1,3 +1,15 @@
 <link rel="icon" href="/icons/favicon.ico" type="image/x-icon">
 <script src="/scripts/aem.js" type="module"></script>
 <link rel="stylesheet" href="/styles/styles.css">
+<script>
+// Fix fragment images that resolve relative to page URL instead of fragment URL
+document.addEventListener('error', (e) => {
+  if (e.target.tagName === 'IMG') {
+    const src = e.target.getAttribute('src') || '';
+    const fixed = src.replace(/^.*\/(media_[^?]+)/, '/$1');
+    if (fixed !== src && fixed.startsWith('/media_')) {
+      e.target.src = fixed;
+    }
+  }
+}, true);
+</script>
