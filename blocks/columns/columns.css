@@ -18,11 +18,21 @@ main .section > div:has(> .columns) {
   background: #fff;
 }
 
+/* Section heading pulled into the columns wrapper */
+.columns-wrapper > h2 {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 48px 0;
+  font-size: 2rem;
+  font-weight: 400;
+  color: #232f3e;
+}
+
 .columns {
   display: grid;
   grid-template-columns: 1fr;
   gap: 32px;
-  padding: 48px;
+  padding: 32px 48px 48px;
   max-width: 1200px;
   margin: 0 auto;
   text-align: left;
