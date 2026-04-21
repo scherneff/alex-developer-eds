@@ -47,9 +47,38 @@ main a.button:any-link {
   main .section { padding: 4rem 2rem; }
 }
 
-main .button-container { display: inline; }
-main a.button:any-link {
-  background: none; border: none; border-radius: 0;
-  color: var(--link-color); font-size: inherit; font-weight: inherit;
-  padding: 0; margin: 0; text-decoration: underline; white-space: normal;
+/* Footer logo row — horizontal layout */
+footer .default-content-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  padding: 40px 24px;
+}
+
+footer .default-content-wrapper p:has(picture) {
+  margin: 0;
+}
+
+footer .default-content-wrapper p:has(picture) img {
+  height: 32px;
+  width: auto;
+}
+
+footer .default-content-wrapper p:not(:has(picture)) {
+  width: 100%;
+  text-align: center;
+  font-size: 0.8rem;
+  margin: 4px 0;
+  color: rgb(208, 212, 215);
+}
+
+footer .default-content-wrapper p:not(:has(picture)) a {
+  color: rgb(208, 212, 215);
+  text-decoration: none;
+}
+
+footer .default-content-wrapper p:not(:has(picture)) a:hover {
+  text-decoration: underline;
 }
