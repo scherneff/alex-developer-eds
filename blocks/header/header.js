@@ -1,6 +1,5 @@
 /**
  * Header block – Alexa Developer Portal
- * AEM serves nav.plain.html as a single <div> with logo, search, account, then nav <ul>
  */
 
 export default async function decorate(block) {
@@ -9,58 +8,57 @@ export default async function decorate(block) {
 
   const resp = await fetch(`${navPath}.plain.html`);
   if (!resp.ok) return;
-  const html = await resp.text();
+  let html = await resp.text();
+
+  // Fix relative ./media_ URLs — they resolve against the page URL, not /nav
+  const navBase = new URL(navPath, window.location.origin).pathname;
+  const navDir = navBase.substring(0, navBase.lastIndexOf('/') + 1);
+  html = html.replace(/(['"])\.\/media_/g, `$1${navDir}media_`);
 
   const tmp = document.createElement('div');
   tmp.innerHTML = html;
 
-  // AEM: all content is in a single top-level div
   const sourceDiv = tmp.querySelector(':scope > div') || tmp;
+  const mainUl = sourceDiv.querySelector(':scope > ul');
+  const nodes = [...sourceDiv.childNodes];
+  const ulIdx = mainUl ? nodes.indexOf(mainUl) : nodes.length;
 
   const nav = document.createElement('nav');
   nav.id = 'nav';
   nav.setAttribute('aria-expanded', window.innerWidth >= 900 ? 'true' : 'false');
 
-  // Brand section: logo, search, account (everything before the <ul>)
+  // Brand: logo, search, account (all nodes before the ul)
   const brand = document.createElement('div');
   brand.classList.add('header-brand');
 
-  const mainUl = sourceDiv.querySelector(':scope > ul');
-  const nodes = [...sourceDiv.childNodes];
-  const ulIdx = nodes.indexOf(mainUl);
-
-  // Pre-ul nodes → brand
-  nodes.slice(0, ulIdx < 0 ? nodes.length : ulIdx).forEach((node) => {
-    if (node.nodeType === 1) { // element
-      const el = node;
-      if (el.tagName === 'P') {
-        const a = el.querySelector('a');
-        if (a?.querySelector('img, picture')) {
-          el.classList.add('header-logo');
-        } else if (a?.textContent.trim().toLowerCase() === 'search') {
-          el.classList.add('header-search');
-          el.innerHTML = `
-            <span class="search-category">All &#9662;</span>
-            <input type="text" placeholder="Search" aria-label="Search">
-            <button class="search-btn" aria-label="Search">&#128269;</button>`;
-        } else {
-          el.classList.add('header-utility');
-        }
+  nodes.slice(0, ulIdx).forEach((node) => {
+    if (node.nodeType !== 1) return;
+    const el = node.cloneNode(true);
+    if (el.tagName === 'P') {
+      if (el.querySelector('img, picture')) {
+        el.classList.add('header-logo');
+      } else if (el.querySelector('a')?.textContent.trim().toLowerCase() === 'search') {
+        el.classList.add('header-search');
+        el.innerHTML = `
+          <span class="search-category">All &#9662;</span>
+          <input type="text" placeholder="Search" aria-label="Search">
+          <button class="search-btn" aria-label="Search">&#128269;</button>`;
+      } else {
+        el.classList.add('header-utility');
       }
-      brand.append(el.cloneNode(true));
     }
+    brand.append(el);
   });
 
   nav.append(brand);
 
-  // Nav <ul>
+  // Nav links
   if (mainUl) {
     const navSection = document.createElement('div');
     navSection.classList.add('header-sections');
     const ul = mainUl.cloneNode(true);
     ul.classList.add('header-nav');
 
-    // Add dropdown support
     ul.querySelectorAll(':scope > li').forEach((li) => {
       const sub = li.querySelector(':scope > ul');
       if (sub) {
