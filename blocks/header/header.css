@@ -1,4 +1,4 @@
-/* Header block — two-tier dark nav */
+/* Header block — matches developer.amazon.com/en-US/alexa nav */
 .header.block {
   background-color: var(--color-dark-navy, rgb(22, 42, 56));
   position: sticky;
@@ -7,90 +7,101 @@
   width: 100%;
 }
 
-/* Outer nav stacks the two tiers vertically */
 .header.block nav {
   display: flex;
   flex-direction: column;
 }
 
 /* ── Tier 1: Logo + Search + Account ── */
+/* Full-width dark bar, 40px tall */
 .header-brand {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0 1.5rem;
-  height: 50px;
-  max-width: var(--content-max-width, 1140px);
-  margin: 0 auto;
+  gap: 0;
+  padding: 0 1rem;
+  height: 40px;
   width: 100%;
   box-sizing: border-box;
 }
 
-/* Logo */
+/* Logo — left side, compact */
+.header-brand .header-logo {
+  flex-shrink: 0;
+  margin-right: 0.75rem;
+}
+
 .header-brand .header-logo img,
 .header-brand .header-logo picture img {
-  height: 28px;
+  height: 30px;
   width: auto;
   display: block;
 }
 
-/* Search bar */
+/* Search — takes up all remaining space in the center */
 .header-brand .header-search {
   display: flex;
   align-items: center;
-  background: rgba(255,255,255,0.1);
-  border-radius: 3px;
-  padding: 0 0.5rem;
-  height: 32px;
   flex: 1;
-  max-width: 400px;
-  margin: 0 0.5rem;
+  height: 28px;
+  background: #fff;
+  border-radius: 2px;
+  overflow: hidden;
 }
 
 .header-brand .header-search span {
-  color: #ccc;
+  color: #555;
   font-size: 12px;
   cursor: pointer;
   white-space: nowrap;
-  margin-right: 4px;
+  padding: 0 6px 0 8px;
+  border-right: 1px solid #ccc;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background: #f3f3f3;
 }
 
 .header-brand .header-search input {
   background: transparent;
   border: none;
-  color: #fff;
+  color: #111;
   font-size: 13px;
-  padding: 0 0.25rem;
+  padding: 0 0.5rem;
   flex: 1;
   outline: none;
+  height: 100%;
 }
 
 .header-brand .header-search input::placeholder {
-  color: rgba(255,255,255,0.5);
+  color: #999;
 }
 
 .header-brand .header-search .search-btn {
   background: rgb(255, 153, 0);
   border: none;
-  border-radius: 2px;
+  border-radius: 0;
   cursor: pointer;
-  font-size: 12px;
-  padding: 2px 8px;
+  font-size: 14px;
+  padding: 0 10px;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
-/* Account / utility links */
+/* Account — right side */
 .header-brand .header-utility {
-  margin-left: auto;
+  flex-shrink: 0;
+  margin-left: 0.75rem;
 }
 
 .header-brand .header-utility a {
   color: #ccc;
-  font-size: 13px;
+  font-size: 12px;
   text-decoration: none;
   white-space: nowrap;
 }
 
-/* Hamburger — hidden on desktop */
+/* Hamburger — mobile only */
 .header-brand .header-hamburger {
   display: none;
   flex-direction: column;
@@ -99,7 +110,7 @@
   border: none;
   cursor: pointer;
   padding: 0.5rem;
-  margin-left: auto;
+  margin-left: 0.5rem;
 }
 
 .header-brand .header-hamburger span {
@@ -109,7 +120,7 @@
   background: #fff;
 }
 
-/* ── Tier 2: Nav links ── */
+/* ── Tier 2: Nav links — darker background, left-aligned ── */
 .header-sections {
   background-color: rgb(21, 41, 57);
   border-top: 1px solid rgba(255,255,255,0.08);
@@ -118,12 +129,10 @@
 .header-sections .header-nav {
   display: flex;
   list-style: none;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-  max-width: var(--content-max-width, 1140px);
+  margin: 0;
+  padding: 0 1rem;
   height: 40px;
-  align-items: center;
-  gap: 0;
+  align-items: stretch;
 }
 
 .header-sections .header-nav > li {
@@ -132,10 +141,10 @@
 
 .header-sections .header-nav > li > p > a,
 .header-sections .header-nav > li > a {
-  display: block;
+  display: flex;
+  align-items: center;
   padding: 0 0.75rem;
   height: 40px;
-  line-height: 40px;
   color: #ccc;
   font-size: 13px;
   text-decoration: none;
@@ -145,7 +154,7 @@
 .header-sections .header-nav > li:hover > p > a,
 .header-sections .header-nav > li:hover > a {
   color: #fff;
-  background: rgba(255,255,255,0.05);
+  background: rgba(255,255,255,0.06);
 }
 
 /* Dropdowns */
@@ -158,8 +167,8 @@
   list-style: none;
   margin: 0;
   padding: 0.5rem 0;
-  min-width: 200px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  min-width: 220px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
   z-index: 200;
 }
 
@@ -169,8 +178,8 @@
 
 .header-sections .header-nav > li > ul > li > a {
   display: block;
-  padding: 0.4rem 1rem;
-  color: #ccc;
+  padding: 0.4rem 1.25rem;
+  color: #bbb;
   font-size: 13px;
   text-decoration: none;
 }
@@ -184,8 +193,21 @@
 @media (max-width: 900px) {
   .header-brand .header-hamburger { display: flex; }
   .header-sections { display: none; }
-  .header.block nav[aria-expanded="true"] .header-sections { display: block; }
-  .header-sections .header-nav { flex-direction: column; height: auto; padding: 0.5rem 0; }
+  .header.block nav[aria-expanded="true"] .header-sections {
+    display: block;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    right: 0;
+  }
+  .header-sections .header-nav {
+    flex-direction: column;
+    height: auto;
+    padding: 0;
+  }
   .header-sections .header-nav > li > p > a,
-  .header-sections .header-nav > li > a { height: auto; line-height: 1.5; padding: 0.5rem 1rem; }
+  .header-sections .header-nav > li > a {
+    height: auto;
+    padding: 0.6rem 1rem;
+  }
 }
