@@ -1,4 +1,4 @@
-/* Header block — matches developer.amazon.com/en-US/alexa nav */
+/* Header block — matches developer.amazon.com nav */
 .header.block {
   background-color: var(--color-dark-navy, rgb(22, 42, 56));
   position: sticky;
@@ -12,40 +12,47 @@
   flex-direction: column;
 }
 
-/* ── Tier 1: Logo + Search + Account ── */
-/* Full-width dark bar, 40px tall */
+/* ── Tier 1: Logo + Search (centered) + Account ── */
 .header-brand {
   display: flex;
   align-items: center;
-  gap: 0;
   padding: 0 1rem;
   height: 40px;
   width: 100%;
   box-sizing: border-box;
 }
 
-/* Logo — left side, compact */
+/* Logo — left, fixed width */
 .header-brand .header-logo {
-  flex-shrink: 0;
-  margin-right: 0.75rem;
+  flex: 0 0 auto;
+  margin-right: 1rem;
 }
 
 .header-brand .header-logo img,
 .header-brand .header-logo picture img {
-  height: 30px;
+  height: 28px;
   width: auto;
   display: block;
 }
 
-/* Search — takes up all remaining space in the center */
+/* Spacer pushes search to center */
+.header-brand .header-logo ~ .header-search {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Search — centered, ~600px, rounded */
 .header-brand .header-search {
   display: flex;
   align-items: center;
-  flex: 0 1 600px;
+  width: 600px;
+  max-width: 600px;
+  flex: 0 0 600px;
   height: 28px;
   background: #fff;
-  border-radius: 2px;
+  border-radius: 20px;
   overflow: hidden;
+  border: none;
 }
 
 .header-brand .header-search span {
@@ -53,12 +60,13 @@
   font-size: 12px;
   cursor: pointer;
   white-space: nowrap;
-  padding: 0 6px 0 8px;
-  border-right: 1px solid #ccc;
+  padding: 0 8px 0 12px;
+  border-right: 1px solid #ddd;
   height: 100%;
   display: flex;
   align-items: center;
   background: #f3f3f3;
+  border-radius: 20px 0 0 20px;
 }
 
 .header-brand .header-search input {
@@ -67,7 +75,7 @@
   color: #111;
   font-size: 13px;
   padding: 0 0.5rem;
-  flex: 0 1 600px;
+  flex: 1;
   outline: none;
   height: 100%;
 }
@@ -79,19 +87,19 @@
 .header-brand .header-search .search-btn {
   background: rgb(255, 153, 0);
   border: none;
-  border-radius: 0;
+  border-radius: 0 20px 20px 0;
   cursor: pointer;
   font-size: 14px;
-  padding: 0 10px;
+  padding: 0 12px;
   height: 100%;
   display: flex;
   align-items: center;
 }
 
-/* Account — right side */
+/* Account — right */
 .header-brand .header-utility {
-  flex-shrink: 0;
-  margin-left: 0.75rem;
+  flex: 0 0 auto;
+  margin-left: 1rem;
 }
 
 .header-brand .header-utility a {
@@ -120,7 +128,7 @@
   background: #fff;
 }
 
-/* ── Tier 2: Nav links — darker background, left-aligned ── */
+/* ── Tier 2: Nav links ── */
 .header-sections {
   background-color: rgb(21, 41, 57);
   border-top: 1px solid rgba(255,255,255,0.08);
@@ -172,9 +180,7 @@
   z-index: 200;
 }
 
-.header-sections .header-nav > li:hover > ul {
-  display: block;
-}
+.header-sections .header-nav > li:hover > ul { display: block; }
 
 .header-sections .header-nav > li > ul > li > a {
   display: block;
@@ -191,23 +197,11 @@
 
 /* ── Mobile ── */
 @media (max-width: 900px) {
+  .header-brand .header-search { flex: 1; width: auto; max-width: none; margin: 0 0.5rem; }
   .header-brand .header-hamburger { display: flex; }
   .header-sections { display: none; }
-  .header.block nav[aria-expanded="true"] .header-sections {
-    display: block;
-    position: absolute;
-    top: 80px;
-    left: 0;
-    right: 0;
-  }
-  .header-sections .header-nav {
-    flex-direction: column;
-    height: auto;
-    padding: 0;
-  }
+  .header.block nav[aria-expanded="true"] .header-sections { display: block; position: absolute; top: 80px; left: 0; right: 0; }
+  .header-sections .header-nav { flex-direction: column; height: auto; padding: 0; }
   .header-sections .header-nav > li > p > a,
-  .header-sections .header-nav > li > a {
-    height: auto;
-    padding: 0.6rem 1rem;
-  }
+  .header-sections .header-nav > li > a { height: auto; padding: 0.6rem 1rem; }
 }
