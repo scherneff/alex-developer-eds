@@ -1,0 +1,18 @@
+/* Footer wrapper styles */
+footer {
+  background: var(--color-nav-dark, rgb(21, 41, 57));
+  color: rgb(208, 212, 215);
+  margin: 0;
+  padding: 0;
+}
+
+footer .section {
+  padding: 0;
+  max-width: 100%;
+  margin: 0;
+}
+
+footer .section > div {
+  max-width: 100%;
+  padding: 0;
+}
