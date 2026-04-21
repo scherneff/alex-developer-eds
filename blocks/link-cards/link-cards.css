@@ -1,0 +1,75 @@
+/* Full-width dark background - target section containing link-cards */
+.section:has(.link-cards) {
+  max-width: 100% !important;
+  padding: 0 !important;
+  background: rgb(73, 81, 89);
+}
+
+.section:has(.link-cards) > div {
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+.link-cards {
+  --card-bg: rgb(73, 81, 89);
+  --cta-bg: rgb(49, 196, 243);
+  --cta-color: #fff;
+  --cta-radius: 4px;
+  --cta-padding: 10px 20px;
+  --block-padding: 48px 2rem;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  padding: var(--block-padding);
+  max-width: 1304px;
+  margin: 0 auto;
+}
+
+.link-cards > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.link-cards > div > div:first-child {
+  margin-bottom: 8px;
+}
+
+.link-cards > div > div:first-child img {
+  max-height: 68px;
+  width: auto;
+  margin: 0 auto;
+}
+
+main .link-cards a.button:any-link {
+  background: var(--cta-bg);
+  color: var(--cta-color);
+  border: none;
+  border-radius: var(--cta-radius);
+  padding: var(--cta-padding);
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+main .link-cards a.button:any-link:hover {
+  opacity: 0.9;
+}
+
+main .link-cards .button-container {
+  display: block;
+  text-align: center;
+}
+
+@media (min-width: 900px) {
+  .link-cards {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+}
