@@ -5,17 +5,12 @@
   padding: 2.5rem 1.5rem 1.5rem;
 }
 
-/* The inner divs are the 4 columns */
 .footer-nav.block > div {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
   max-width: var(--content-max-width, 1140px);
   margin: 0 auto;
-}
-
-.footer-nav.block > div > div {
-  /* each column */
 }
 
 .footer-nav.block h3 {
@@ -45,7 +40,12 @@
   color: #fff;
 }
 
-/* Social icons row */
+.footer-nav.block p {
+  color: #aaa;
+  font-size: 13px;
+  margin: 0 0 0.5rem;
+}
+
 .footer-nav.block p img {
   height: 24px;
   width: 24px;
@@ -54,21 +54,48 @@
   vertical-align: middle;
 }
 
-/* Follow Us label */
-.footer-nav.block p {
-  color: #aaa;
-  font-size: 13px;
-  margin: 0 0 0.5rem;
-}
-
 @media (max-width: 900px) {
-  .footer-nav.block > div {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  .footer-nav.block > div { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 480px) {
-  .footer-nav.block > div {
-    grid-template-columns: 1fr;
-  }
+  .footer-nav.block > div { grid-template-columns: 1fr; }
+}
+
+/* Partner logos section — default-content after footer-nav block */
+footer .default-content-wrapper,
+footer .section > div:not([class*="block"]) {
+  background-color: var(--color-footer-bottom, rgb(64, 73, 81));
+  padding: 1.5rem;
+}
+
+footer .default-content-wrapper p,
+footer .section > div:not([class*="block"]) p {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0.5rem 0;
+  color: #aaa;
+  font-size: 12px;
+}
+
+footer .default-content-wrapper img,
+footer .section > div:not([class*="block"]) img {
+  height: 28px;
+  width: auto;
+  display: inline-block;
+}
+
+footer .default-content-wrapper a,
+footer .section > div:not([class*="block"]) a {
+  color: #aaa;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+footer .default-content-wrapper a:hover,
+footer .section > div:not([class*="block"]) a:hover {
+  color: #fff;
 }
