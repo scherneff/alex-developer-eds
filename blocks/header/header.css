@@ -9,7 +9,7 @@
   --header-text-color: #fff;
   --header-nav-font-size: 14px;
   --header-nav-font-weight: 300;
-  --header-height-brand: 56px;
+  --header-height-brand: 40px;
   --header-height-nav: 40px;
   --header-dropdown-background: #fff;
   --header-dropdown-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -32,8 +32,8 @@
   display: flex;
   align-items: center;
   background: var(--header-brand-bg);
-  padding: 8px 16px;
-  min-height: var(--header-height-brand);
+  padding: 0 16px;
+  height: var(--header-height-brand);
   gap: 16px;
 }
 
