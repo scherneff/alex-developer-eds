@@ -3,8 +3,7 @@
 /* Amazon Ember Display font faces */
 @font-face {
   font-family: "AmazonEmber";
-  src: url("/fonts/AmazonEmberDisplay_Lt.woff") format("woff"),
-       url("/fonts/AmazonEmberDisplay_Lt.ttf") format("truetype");
+  src: url("/fonts/AmazonEmberDisplay_Lt.ttf") format("truetype");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -12,8 +11,7 @@
 
 @font-face {
   font-family: "AmazonEmber";
-  src: url("/fonts/AmazonEmberDisplay_Rg.woff") format("woff"),
-       url("/fonts/AmazonEmberDisplay_Rg.ttf") format("truetype");
+  src: url("/fonts/AmazonEmberDisplay_Rg.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -21,8 +19,7 @@
 
 @font-face {
   font-family: "AmazonEmber";
-  src: url("/fonts/AmazonEmberDisplay_Md.woff") format("woff"),
-       url("/fonts/AmazonEmberDisplay_Md.ttf") format("truetype");
+  src: url("/fonts/AmazonEmberDisplay_Md.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -30,8 +27,7 @@
 
 @font-face {
   font-family: "AmazonEmber";
-  src: url("/fonts/AmazonEmberDisplay_Bd.woff") format("woff"),
-       url("/fonts/AmazonEmberDisplay_Bd.ttf") format("truetype");
+  src: url("/fonts/AmazonEmberDisplay_Bd.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -39,8 +35,7 @@
 
 @font-face {
   font-family: "AmazonEmber";
-  src: url("/fonts/AmazonEmberDisplay_He.woff") format("woff"),
-       url("/fonts/AmazonEmberDisplay_He.ttf") format("truetype");
+  src: url("/fonts/AmazonEmberDisplay_He.ttf") format("truetype");
   font-weight: 900;
   font-style: normal;
   font-display: swap;
