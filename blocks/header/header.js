@@ -5,20 +5,31 @@
 export default async function decorate(block) {
   const navMeta = document.head.querySelector('meta[name="nav"]');
   const navPath = navMeta ? navMeta.content : '/nav';
+  const navUrl = new URL(navPath, window.location.origin);
 
   const resp = await fetch(`${navPath}.plain.html`);
   if (!resp.ok) return;
-  let html = await resp.text();
+  const html = await resp.text();
 
-  // Fix relative ./media_ URLs — they resolve against the page URL, not /nav
-  const navBase = new URL(navPath, window.location.origin).pathname;
-  const navDir = navBase.substring(0, navBase.lastIndexOf('/') + 1);
-  html = html.replace(/(['"])\.\/media_/g, `$1${navDir}media_`);
+  // Parse into a temporary document so relative URLs resolve against the nav URL
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(`<base href="${navUrl.href}">` + html, 'text/html');
 
-  const tmp = document.createElement('div');
-  tmp.innerHTML = html;
+  // Fix all relative image srcs to be absolute
+  doc.querySelectorAll('img').forEach((img) => {
+    const src = img.getAttribute('src');
+    if (src && !src.startsWith('http') && !src.startsWith('//')) {
+      img.setAttribute('src', new URL(src, navUrl.href).href);
+    }
+  });
+  doc.querySelectorAll('source').forEach((src) => {
+    const ss = src.getAttribute('srcset');
+    if (ss && !ss.startsWith('http') && !ss.startsWith('//')) {
+      src.setAttribute('srcset', new URL(ss, navUrl.href).href);
+    }
+  });
 
-  const sourceDiv = tmp.querySelector(':scope > div') || tmp;
+  const sourceDiv = doc.querySelector('body > div') || doc.body;
   const mainUl = sourceDiv.querySelector(':scope > ul');
   const nodes = [...sourceDiv.childNodes];
   const ulIdx = mainUl ? nodes.indexOf(mainUl) : nodes.length;
@@ -27,7 +38,6 @@ export default async function decorate(block) {
   nav.id = 'nav';
   nav.setAttribute('aria-expanded', window.innerWidth >= 900 ? 'true' : 'false');
 
-  // Brand: logo, search, account (all nodes before the ul)
   const brand = document.createElement('div');
   brand.classList.add('header-brand');
 
@@ -52,7 +62,6 @@ export default async function decorate(block) {
 
   nav.append(brand);
 
-  // Nav links
   if (mainUl) {
     const navSection = document.createElement('div');
     navSection.classList.add('header-sections');
@@ -83,7 +92,6 @@ export default async function decorate(block) {
     nav.append(navSection);
   }
 
-  // Hamburger
   const hamburger = document.createElement('button');
   hamburger.classList.add('header-hamburger');
   hamburger.setAttribute('aria-label', 'Open navigation');
