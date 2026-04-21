@@ -1,15 +1,12 @@
 /**
  * Header block – Alexa Developer Portal
- * Two-tier: brand bar (logo + search + utility) on top, main nav below.
  */
 
 function buildBrandSection(div) {
   div.classList.add('header-brand');
-
-  const logoLink = div.querySelector('a:has(img)');
+  const logoLink = div.querySelector('a:has(img), a img')?.closest('a');
   if (logoLink) logoLink.classList.add('header-logo');
 
-  /* Turn the "Search" link into a search bar placeholder */
   const paras = [...div.querySelectorAll('p')];
   const searchP = paras.find((p) => {
     const a = p.querySelector('a');
@@ -23,7 +20,6 @@ function buildBrandSection(div) {
       <button class="search-btn" aria-label="Search">&#128269;</button>`;
   }
 
-  /* Utility links (account | help) */
   const utilP = paras.find(
     (p) => !p.classList.contains('header-search') && !p.querySelector('img'),
   );
@@ -32,7 +28,6 @@ function buildBrandSection(div) {
 
 function buildNavSection(div) {
   div.classList.add('header-sections');
-
   const ul = div.querySelector('ul');
   if (!ul) return;
   ul.classList.add('header-nav');
@@ -43,8 +38,7 @@ function buildNavSection(div) {
       li.classList.add('has-dropdown');
       sub.classList.add('header-dropdown');
       li.setAttribute('aria-expanded', 'false');
-
-      const toggle = li.querySelector(':scope > a');
+      const toggle = li.querySelector(':scope > p > a, :scope > a');
       if (toggle) {
         toggle.addEventListener('click', (e) => {
           if (window.innerWidth < 900) {
@@ -56,14 +50,6 @@ function buildNavSection(div) {
             li.setAttribute('aria-expanded', String(!open));
           }
         });
-
-        /* Desktop: open on hover */
-        li.addEventListener('mouseenter', () => {
-          if (window.innerWidth >= 900) li.setAttribute('aria-expanded', 'true');
-        });
-        li.addEventListener('mouseleave', () => {
-          if (window.innerWidth >= 900) li.setAttribute('aria-expanded', 'false');
-        });
       }
     }
   });
@@ -72,25 +58,33 @@ function buildNavSection(div) {
 export default async function decorate(block) {
   const navMeta = document.head.querySelector('meta[name="nav"]');
   const navPath = navMeta ? navMeta.content : '/nav';
+
+  // AEM serves the fragment at /nav.plain.html
   const resp = await fetch(`${navPath}.plain.html`);
   if (!resp.ok) return;
   const html = await resp.text();
 
   const tmp = document.createElement('div');
   tmp.innerHTML = html;
-  const sections = [...tmp.children]; // top-level <div>s
+
+  // AEM fragment: each top-level div is a section
+  // The fragment has sections wrapping the content
+  let sections = [...tmp.querySelectorAll(':scope > div')];
+  if (!sections.length) sections = [...tmp.children];
 
   const nav = document.createElement('nav');
   nav.id = 'nav';
   nav.setAttribute('aria-expanded', window.innerWidth >= 900 ? 'true' : 'false');
 
   sections.forEach((section, idx) => {
-    if (idx === 0) buildBrandSection(section);
-    else buildNavSection(section);
-    nav.append(section);
+    // Unwrap section wrappers from AEM decoration
+    const inner = section.querySelector('.default-content-wrapper, div') || section;
+    const content = inner !== section ? inner : section;
+    if (idx === 0) buildBrandSection(content);
+    else buildNavSection(content);
+    nav.append(content);
   });
 
-  /* Hamburger */
   const hamburger = document.createElement('button');
   hamburger.classList.add('header-hamburger');
   hamburger.setAttribute('aria-label', 'Open navigation');
@@ -102,19 +96,6 @@ export default async function decorate(block) {
     hamburger.setAttribute('aria-expanded', String(!open));
   });
   nav.querySelector('.header-brand')?.append(hamburger);
-
-  /* Keyboard */
-  nav.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      nav.querySelectorAll('.has-dropdown[aria-expanded="true"]').forEach((li) => {
-        li.setAttribute('aria-expanded', 'false');
-      });
-      if (window.innerWidth < 900) {
-        nav.setAttribute('aria-expanded', 'false');
-        hamburger.setAttribute('aria-expanded', 'false');
-      }
-    }
-  });
 
   window.addEventListener('resize', () => {
     if (window.innerWidth >= 900) nav.setAttribute('aria-expanded', 'true');
