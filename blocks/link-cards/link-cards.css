@@ -1,41 +1,41 @@
-/* Link Cards block — matches source: dark gray row, 4 centered columns, cyan buttons */
+/* Link Cards block — dark gray row, 4 columns, icon above cyan button */
 .link-cards.block {
   background-color: rgb(73, 81, 89);
   width: 100%;
 }
 
-/* Override section padding — this block spans full width */
+/* Remove section padding so this spans full width */
 main .section:has(.link-cards.block) {
   padding: 0;
   max-width: none;
   margin: 0;
 }
 
-/* Inner row: 4 equal columns, centered, with 48px horizontal padding */
+/* 4 columns in a row */
 .link-cards.block > div {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0;
   padding: 0 48px;
+  min-height: 214px;
   max-width: 1200px;
   margin: 0 auto;
-  min-height: 214px;
+  gap: 16px;
 }
 
-/* Each card = one row of the EDS table = icon + link */
+/* Each card = flex column: icon on top, button below */
 .link-cards.block > div > div {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   flex: 1;
-  padding: 20px 16px;
+  gap: 14px;
+  padding: 24px 8px;
   text-align: center;
-  gap: 12px;
 }
 
-/* Icon image */
+/* Icon */
 .link-cards.block img {
   height: 74px;
   width: auto;
@@ -43,42 +43,38 @@ main .section:has(.link-cards.block) {
   margin: 0 auto;
 }
 
-/* Button link */
-.link-cards.block a {
-  display: inline-block;
-  background-color: rgb(49, 196, 243);
+/* Cyan button */
+.link-cards.block a,
+.link-cards.block a.button:any-link {
+  display: inline-block !important;
+  background-color: rgb(49, 196, 243) !important;
   color: #fff !important;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 16px !important;
+  font-weight: 600 !important;
   text-decoration: none !important;
-  padding: 10px 20px;
-  border-radius: 4px;
+  padding: 10px 20px !important;
+  border-radius: 4px !important;
   white-space: nowrap;
+  border: none !important;
+  margin: 0 !important;
 }
 
 .link-cards.block a:hover {
-  background-color: rgb(0, 168, 204);
+  background-color: rgb(0, 168, 204) !important;
 }
 
-/* EDS button override — undo the global reset for this block */
-main .link-cards.block .button-container { display: block; }
-main .link-cards.block a.button:any-link {
-  background: rgb(49, 196, 243);
-  border: none;
-  border-radius: 4px;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 600;
-  padding: 10px 20px;
-  text-decoration: none;
+.link-cards.block .button-container {
+  display: block !important;
+  margin: 0 !important;
 }
 
 @media (max-width: 900px) {
   .link-cards.block > div {
     flex-wrap: wrap;
-    padding: 0 16px;
+    padding: 16px;
+    gap: 8px;
   }
   .link-cards.block > div > div {
-    flex: 0 0 50%;
+    flex: 0 0 calc(50% - 8px);
   }
 }
