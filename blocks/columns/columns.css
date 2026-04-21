@@ -52,10 +52,9 @@ main .section > div:has(> .columns) {
 }
 
 .columns > div > div:first-child img {
-  height: 416px;
+  max-height: 80px;
   width: auto;
-  max-width: 100%;
-  object-fit: contain;
+  max-width: 180px;
 }
 
 .columns h3 {
