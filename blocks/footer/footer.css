@@ -1,18 +1,38 @@
-/* Footer wrapper styles */
-footer {
-  background: var(--color-nav-dark, rgb(21, 41, 57));
-  color: rgb(208, 212, 215);
-  margin: 0;
-  padding: 0;
+/* Footer container styles — applied via the footer block */
+
+/* Partner logos bar (default-content below footer-nav block) */
+footer .default-content-wrapper {
+  background-color: var(--color-footer-bottom, rgb(64, 73, 81));
+  padding: 1.25rem 1.5rem;
 }
 
-footer .section {
-  padding: 0;
-  max-width: 100%;
-  margin: 0;
+footer .default-content-wrapper p {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0.25rem 0;
+  color: #aaa;
+  font-size: 12px;
 }
 
-footer .section > div {
-  max-width: 100%;
-  padding: 0;
+footer .default-content-wrapper img {
+  height: 28px;
+  width: auto;
+  display: inline-block;
+}
+
+footer .default-content-wrapper a {
+  color: #aaa;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+footer .default-content-wrapper a:hover {
+  color: #fff;
+}
+
+footer .default-content-wrapper a > img {
+  height: 28px;
 }
