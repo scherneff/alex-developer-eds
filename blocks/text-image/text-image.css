@@ -13,7 +13,8 @@
   background: var(--color-light-gray, #f6f6f6);
 }
 
-.section:has(.text-image) > div {
+/* Only constrain the wrapper div that directly contains the text-image block */
+.section > div:has(> .text-image) {
   max-width: var(--content-max-width, 1140px);
   margin: 0 auto;
   padding: 48px;
